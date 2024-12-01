@@ -1,0 +1,12 @@
+@set jp=c:\__kko\apache-maven-3.9.5\bin\
+
+@set PATH=%PATH%;c:\__kko\apache-maven-3.9.5\bin\
+
+@set JAVA_HOME=c:\Program files\Java\jdk-18.0.2.1\
+:c:\OpenJDK\
+
+
+
+
+@%JAVA_HOME%java -jar target\spring2t-1.0-SNAPSHOT.jar || pause
+@pause
