@@ -19,7 +19,6 @@ import java.util.Arrays;*/
 
 import org.example.dto.*;
 
-import org.springframework.web.client.RestTemplate;
 
 import org.example.util.*;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,22 +27,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import org.example.service.*;
+
 
 @RestController
 @RequestMapping("/api")
 public class MyRestController {
+    @Autowired
+    MyRestService s;
 
     @GetMapping("/news")
     public Page news(Model model) {
         try{
-            Page p=new RestTemplate().getForObject("http://127.0.0.1:8201/api/news",Page.class);;
-            return p;
+            return s.getNews();
         }catch(Exception e){throw new MyRestException();}
     }
 
     @GetMapping("/location")
     public Location location(Model model) {
-        return new Location("Великий Новгород");
+        return s.getLocation();
     }
     @ExceptionHandler({MyRestException.class})
     private ResponseEntity<MyErrorResponse> handleException(MyRestException s){
